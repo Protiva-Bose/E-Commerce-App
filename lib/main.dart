@@ -1,8 +1,22 @@
-import 'package:e_commerce_app/features/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+import 'app/routes/app_routes.dart';
+import 'app/viewmodels/app_viewmodels.dart';
+import 'app/themes/app_theme.dart';
+import 'core/di/di_config.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await diConfig();
+
+  runApp(
+    MultiProvider(
+      providers: AppViewModels.viewmodels,
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -10,14 +24,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
+    return ScreenUtilInit(
+      designSize: const Size(360, 690),
+      minTextAdapt: true,
+      builder: (context, child) {
+        return MaterialApp(
+          title: 'Flutter App',
+          debugShowCheckedModeBanner: false,
 
-        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
-      ),
-      home: SplashScreen(),
+          theme: AppTheme.light,
+          darkTheme: AppTheme.dark,
+          themeMode: ThemeMode.light,
+
+          initialRoute: AppRoutes.initialRoute,
+          routes: AppRoutes.routes,
+        );
+      },
     );
   }
 }
