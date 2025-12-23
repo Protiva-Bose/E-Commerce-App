@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
+import '../../auth/presentation/view/create_account.dart';
+import '../../categories/categories_screen.dart';
+import '../../home/view/screens/cart.dart';
+import '../../wish_list/presentation/view/wish_list_screen.dart';
 import '../view_model/parent_view_model.dart';
 
 class ParentScreen extends StatefulWidget {
@@ -74,9 +78,9 @@ class _ParentScreenState extends State<ParentScreen>
       builder: (__, navParentProvider, child) {
         final List<Widget> pages = [
           const HomeScreen(),
-          const HomeScreen(),
-          const HomeScreen(),
-          const HomeScreen(),
+          const CategoriesScreen(),
+          const Cart(),
+          const WishListScreen(),
         ];
 
         return Scaffold(

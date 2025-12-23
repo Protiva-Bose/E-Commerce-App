@@ -1,9 +1,11 @@
 import 'package:e_commerce_app/core/constant/route_names.dart';
+import 'package:e_commerce_app/features/widgets/section_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../core/constant/app_colors.dart';
+import '../../widgets/category_item.dart';
+import '../../widgets/product_card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -102,194 +104,42 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               SizedBox(height: 20.h),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'All Categories',
-                    style: TextStyle(
-                      color: Colors.grey.shade700,
-                      fontSize: 22,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                  Text(
-                    'See All',
-                    style: TextStyle(
-                      color: AppColors.primary,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                ],
-              ),
+             SectionHeader(title: 'All Categories',onSeeAllTap: (){
+               Navigator.pushNamed(context, RouteNames.categoriesScreen);
+             },),
               SizedBox(height: 10.h),
               Row(
                 spacing: 15,
-                children: [
-                  Column(
-                    spacing: 8,
-                    children: [
-                      Container(
-                        width: 70.w,
-                        height: 55.h,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12.r),
-                          color: Color(0xffE1FFFD),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Image.asset(
-                            'assets/icons/tv.png',
-                            color: AppColors.primary,
-                            scale: 3,
-                          ),
-                        ),
-                      ),
-                      Text(
-                        'Electronics',
-                        style: TextStyle(
-                          color: AppColors.primary,
-                          fontWeight: FontWeight.w800,
-                        ),
-                      ),
-                    ],
+                children: const [
+                  CategoryItem(
+                    title: 'Electronics',
+                    iconPath: 'assets/icons/tv.png',
                   ),
-
-                  Column(
-                    spacing: 8,
-                    children: [
-                      Container(
-                        width: 70.w,
-                        height: 55.h,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12.r),
-                          color: Color(0xffE1FFFD),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Image.asset(
-                            'assets/icons/fruites1.png',
-                            color: AppColors.primary,
-                            scale: 3,
-                          ),
-                        ),
-                      ),
-                      Text(
-                        'Food',
-                        style: TextStyle(
-                          color: AppColors.primary,
-                          fontWeight: FontWeight.w800,
-                        ),
-                      ),
-                    ],
+                  CategoryItem(
+                    title: 'Food',
+                    iconPath: 'assets/icons/fruites1.png',
                   ),
-
-                  Column(
-                    spacing: 8,
-                    children: [
-                      Container(
-                        width: 70.w,
-                        height: 55.h,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12.r),
-                          color: Color(0xffE1FFFD),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Image.asset(
-                            'assets/icons/diamond1.png',
-                            color: AppColors.primary,
-                            scale: 3,
-                          ),
-                        ),
-                      ),
-                      Text(
-                        'Fashion',
-                        style: TextStyle(
-                          color: AppColors.primary,
-                          fontWeight: FontWeight.w800,
-                        ),
-                      ),
-                    ],
+                  CategoryItem(
+                    title: 'Fashion',
+                    iconPath: 'assets/icons/diamond1.png',
                   ),
-
-                  Column(
-                    spacing: 8,
-                    children: [
-                      Container(
-                        width: 70.w,
-                        height: 55.h,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12.r),
-                          color: Color(0xffE1FFFD),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Image.asset(
-                            'assets/icons/bed1.png',
-                            color: AppColors.primary,
-                            scale: 3,
-                          ),
-                        ),
-                      ),
-                      Text(
-                        'Furniture',
-                        style: TextStyle(
-                          color: AppColors.primary,
-                          fontWeight: FontWeight.w800,
-                        ),
-                      ),
-                    ],
+                  CategoryItem(
+                    title: 'Furniture',
+                    iconPath: 'assets/icons/bed1.png',
                   ),
                 ],
               ),
+
               SizedBox(height: 15.h),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Popular',
-                    style: TextStyle(
-                      color: Colors.grey.shade700,
-                      fontSize: 22,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                  Text(
-                    'See All',
-                    style: TextStyle(
-                      color: AppColors.primary,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                ],
-              ),
+              SectionHeader(title: 'Popular',onSeeAllTap: (){
+                Navigator.pushNamed(context, RouteNames.seeAllProducts);
+              },),
               SizedBox(height: 10.h),
               ProductCard(),
               SizedBox(height: 15.h),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Spacial',
-                    style: TextStyle(
-                      color: Colors.grey.shade700,
-                      fontSize: 22,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                  Text(
-                    'See All',
-                    style: TextStyle(
-                      color: AppColors.primary,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                ],
-              ),
+              SectionHeader(title: 'Special',onSeeAllTap: (){
+                Navigator.pushNamed(context, RouteNames.seeAllProducts);
+              },),
               SizedBox(height: 10.h),
               ProductCard(),
               SizedBox(height: 15.h),
@@ -392,125 +242,6 @@ class _HomeScreenState extends State<HomeScreen> {
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(16),
       borderSide: BorderSide.none,
-    );
-  }
-}
-
-class ProductCard extends StatelessWidget {
-  const ProductCard({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 150.h,
-      child: ListView.builder(
-        itemCount: 6,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: GestureDetector(
-              onTap: (){
-                Navigator.pushNamed(context, RouteNames.productDetailsScreen);
-              },
-              child: Container(
-                margin: EdgeInsets.only(right: 5.w),
-                width: 160.w,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.1),
-                      blurRadius: 10,
-                      spreadRadius: 3,
-                    ),
-                  ],
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      height: 90.h,
-                      decoration: const BoxDecoration(color: Color(0xFFE6F7F8)),
-                      child: Center(
-                        child: Transform.rotate(
-                          angle: -0.2,
-                          child: Image.asset(
-                            'assets/images/shoe.png',
-                            scale: 1.5,
-                            fit: BoxFit.contain,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 6,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'New Year Special Shoe 30',
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600,
-                              color: Color(0xFF4A4A4A),
-                            ),
-                          ),
-                          SizedBox(height: 2.h),
-                          Row(
-                            children: [
-                              const Text(
-                                '\$100',
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: Color(0xFF00A9B7),
-                                ),
-                              ),
-                              const SizedBox(width: 20),
-                              const Icon(
-                                Icons.star,
-                                color: Color(0xFFFFD700),
-                                size: 20,
-                              ),
-                              const SizedBox(width: 5),
-                              const Text(
-                                '4.8',
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  color: Colors.grey,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              const Spacer(),
-                              Container(
-                                padding: const EdgeInsets.all(8),
-                                decoration: BoxDecoration(
-                                  color: const Color(0xFF00A9B7),
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                                child: const Icon(
-                                  Icons.favorite_border,
-                                  color: Colors.white70,
-                                  size: 12,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          );
-        },
-      ),
     );
   }
 }

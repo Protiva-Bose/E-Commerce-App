@@ -1,17 +1,19 @@
 import 'package:e_commerce_app/core/constant/route_names.dart';
 import 'package:flutter/material.dart';
 
-class ProductDetailsScreen extends StatefulWidget {
-  const ProductDetailsScreen({super.key});
+class ProductDetail extends StatefulWidget {
+  const ProductDetail({super.key});
 
   @override
-  State<ProductDetailsScreen> createState() => _ProductDetailsScreenState();
+  State<ProductDetail> createState() => _ProductDetailState();
 }
 
-class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
+class _ProductDetailState extends State<ProductDetail> {
   int quantity = 1;
   int selectedColorIndex = 1;
   int selectedSizeIndex = 1;
+
+  final Color uiPrimaryColor = const Color(0xFF00A9B7);
 
   final List<Color> colors = [
     Colors.black,
@@ -25,8 +27,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final Color activeColor = colors[selectedColorIndex];
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -49,12 +49,19 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             child: Row(
                               children: [
                                 IconButton(
-                                  icon: Icon(Icons.arrow_back_ios, size: 20, color: activeColor),
+                                  icon: Icon(
+                                    Icons.arrow_back_ios,
+                                    size: 20,
+                                    color: uiPrimaryColor,
+                                  ),
                                   onPressed: () => Navigator.pop(context),
                                 ),
                                 const Text(
                                   'Product Details',
-                                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
                               ],
                             ),
@@ -84,10 +91,13 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                               const Expanded(
                                 child: Text(
                                   'Happy New Year Special Deal\nSave 30%',
-                                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ),
-                              _quantitySelector(activeColor),
+                              _quantitySelector(uiPrimaryColor),
                             ],
                           ),
 
@@ -96,43 +106,59 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           Row(
                             children: [
                               GestureDetector(
-                                onTap: (){
-                                  Navigator.pushNamed(context, RouteNames.createReview);
+                                onTap: () {
+                                  Navigator.pushNamed(
+                                    context,
+                                    RouteNames.createReview,
+                                  );
                                 },
-                                child: Row(
+                                child: const Row(
                                   children: [
-                                    const Icon(Icons.star, color: Color(0xFFFFD700)),
-                                    const SizedBox(width: 5),
-                                    const Text('4.8', style: TextStyle(color: Colors.grey)),
-                                    const SizedBox(width: 15),
+                                    Icon(Icons.star, color: Color(0xFFFFD700)),
+                                    SizedBox(width: 5),
+                                    Text(
+                                      '4.8',
+                                      style: TextStyle(color: Colors.grey),
+                                    ),
+                                    SizedBox(width: 15),
                                   ],
                                 ),
                               ),
 
                               GestureDetector(
-                                onTap: (){
-                                  Navigator.pushNamed(context, RouteNames.reviews);
+                                onTap: () {
+                                  Navigator.pushNamed(
+                                    context,
+                                    RouteNames.reviews,
+                                  );
                                 },
                                 child: Text(
                                   'Reviews',
                                   style: TextStyle(
-                                    color: activeColor,
+                                    color: uiPrimaryColor,
                                     decoration: TextDecoration.underline,
-                                    decorationColor: activeColor
+                                    decorationColor: uiPrimaryColor,
                                   ),
                                 ),
                               ),
+
                               const SizedBox(width: 15),
-                              Container(
-                                padding: const EdgeInsets.all(8),
-                                decoration: BoxDecoration(
-                                  color: activeColor,
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                                child: const Icon(
-                                  Icons.favorite_border,
-                                  color: Colors.white70,
-                                  size: 12,
+
+                              GestureDetector(
+                                onTap: (){
+                                  Navigator.pushNamed(context, RouteNames.productDetailsScreen);
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.all(8),
+                                  decoration: BoxDecoration(
+                                    color: uiPrimaryColor,
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  child: const Icon(
+                                    Icons.favorite_border,
+                                    color: Colors.white70,
+                                    size: 12,
+                                  ),
                                 ),
                               ),
                             ],
@@ -140,17 +166,27 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 
                           const SizedBox(height: 20),
 
-                          const Text('Color', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+                          const Text(
+                            'Color',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
                           const SizedBox(height: 10),
+
                           Row(
                             children: List.generate(
                               colors.length,
                                   (index) => GestureDetector(
-                                onTap: () => setState(() => selectedColorIndex = index),
+                                onTap: () {
+                                  setState(() {
+                                    selectedColorIndex = index;
+                                  });
+                                },
                                 child: _buildColorOption(
                                   colors[index],
                                   selectedColorIndex == index,
-                                  activeColor,
                                 ),
                               ),
                             ),
@@ -158,28 +194,50 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 
                           const SizedBox(height: 20),
 
-                          const Text('Size', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+                          const Text(
+                            'Size',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
                           const SizedBox(height: 10),
+
                           Row(
                             children: List.generate(
                               sizes.length,
                                   (index) => GestureDetector(
-                                onTap: () => setState(() => selectedSizeIndex = index),
+                                onTap: () {
+                                  setState(() {
+                                    selectedSizeIndex = index;
+                                  });
+                                },
                                 child: _buildSizeOption(
                                   sizes[index],
                                   selectedSizeIndex == index,
-                                  activeColor,
+                                  uiPrimaryColor,
                                 ),
                               ),
                             ),
                           ),
 
                           const SizedBox(height: 20),
-                          const Text('Description', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+
+                          const Text(
+                            'Description',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
                           const SizedBox(height: 10),
+
                           const Text(
                             'Reference site about Lorem Ipsum, giving information on its origins as well as a random Lipsum generator.',
-                            style: TextStyle(color: Colors.grey, height: 1.5),
+                            style: TextStyle(
+                              color: Colors.grey,
+                              height: 1.5,
+                            ),
                           ),
                         ],
                       ),
@@ -189,70 +247,74 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               ),
             ),
 
-            _bottomBar(activeColor),
+            _bottomBar(uiPrimaryColor),
           ],
         ),
       ),
     );
   }
 
-  Widget _quantitySelector(Color activeColor) {
-    return Row(spacing: 8,
-        children: [
-          SizedBox(
-            width: 35,
-            height: 35,
-            child: Container(decoration: BoxDecoration(
-              color: activeColor.withOpacity(0.6),
-              borderRadius: BorderRadius.circular(5),
-            ),
-              child: IconButton(
-                onPressed: quantity > 1 ? () => setState(() => quantity--) : null,
-                icon: const Icon(Icons.remove, color: Colors.white,size: 18),
-              ),
-            ),
-          ),
-          Text('$quantity', style: const TextStyle(color: Colors.black)),
-          SizedBox( width: 35,
-            height: 35,
-            child: Container(decoration: BoxDecoration(
-              color: activeColor.withOpacity(0.6),
-              borderRadius: BorderRadius.circular(5),
-            ),
-              child: IconButton(
-                onPressed: () => setState(() => quantity++),
-                icon: const Icon(Icons.add, color: Colors.white,size: 18,),
-              ),
-            ),
-          ),
-        ],
-      );
+  Widget _quantitySelector(Color uiColor) {
+    return Row(
+      children: [
+        _qtyButton(Icons.remove, uiColor, quantity > 1 ? () {
+          setState(() => quantity--);
+        } : null),
+        const SizedBox(width: 8),
+        Text('$quantity'),
+        const SizedBox(width: 8),
+        _qtyButton(Icons.add, uiColor, () {
+          setState(() => quantity++);
+        }),
+      ],
+    );
   }
 
-  Widget _buildColorOption(Color color, bool selected, Color activeColor) {
+  Widget _qtyButton(IconData icon, Color color, VoidCallback? onTap) {
+    return SizedBox(
+      width: 35,
+      height: 35,
+      child: Container(
+        decoration: BoxDecoration(
+          color: color.withOpacity(0.6),
+          borderRadius: BorderRadius.circular(5),
+        ),
+        child: IconButton(
+          onPressed: onTap,
+          icon: Icon(icon, color: Colors.white, size: 18),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildColorOption(Color color, bool selected) {
     return Container(
       margin: const EdgeInsets.only(right: 15),
       padding: const EdgeInsets.all(2),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        border: selected ? Border.all(color: activeColor, width: 2) : null,
+        border: selected
+            ? Border.all(color: Colors.black, width: 2)
+            : null,
       ),
       child: CircleAvatar(
         radius: 12,
         backgroundColor: color,
-        child: selected ? const Icon(Icons.check, color: Colors.white, size: 14) : null,
+        child: selected
+            ? const Icon(Icons.check, color: Colors.white, size: 14)
+            : null,
       ),
     );
   }
 
-  Widget _buildSizeOption(String size, bool selected, Color activeColor) {
+  Widget _buildSizeOption(String size, bool selected, Color uiColor) {
     return Container(
       margin: const EdgeInsets.only(right: 15),
       width: 35,
       height: 35,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: selected ? activeColor : Colors.white,
+        color: selected ? uiColor : Colors.white,
         border: Border.all(color: Colors.grey.shade300),
       ),
       child: Center(
@@ -267,12 +329,12 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     );
   }
 
-  Widget _bottomBar(Color activeColor) {
+  Widget _bottomBar(Color uiColor) {
     return Container(
       padding: const EdgeInsets.all(20),
       margin: const EdgeInsets.all(15),
       decoration: BoxDecoration(
-        color: activeColor.withOpacity(0.15),
+        color: uiColor.withOpacity(0.15),
         borderRadius: BorderRadius.circular(20),
       ),
       child: Row(
@@ -287,7 +349,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
-                  color: activeColor,
+                  color: uiColor,
                 ),
               ),
             ],
@@ -295,11 +357,19 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           ElevatedButton(
             onPressed: () {},
             style: ElevatedButton.styleFrom(
-              backgroundColor: activeColor,
-              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+              backgroundColor: uiColor,
+              padding: const EdgeInsets.symmetric(
+                horizontal: 30,
+                vertical: 15,
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
             ),
-            child: const Text('Add To Cart', style: TextStyle(color: Colors.white)),
+            child: const Text(
+              'Add To Cart',
+              style: TextStyle(color: Colors.white),
+            ),
           ),
         ],
       ),

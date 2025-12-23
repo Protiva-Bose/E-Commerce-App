@@ -1,23 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class SeeAllProducts extends StatefulWidget {
-  const SeeAllProducts({super.key});
+class WishListScreen extends StatefulWidget {
+  const WishListScreen({super.key});
 
   @override
-  State<SeeAllProducts> createState() => _SeeAllProductsState();
+  State<WishListScreen> createState() => _WishListScreenState();
 }
 
-class _SeeAllProductsState extends State<SeeAllProducts> {
+class _WishListScreenState extends State<WishListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        leading: IconButton(onPressed: (){
-          Navigator.pop(context);
-        },  icon: Icon(Icons.arrow_back_ios)),
-        title: const Text('All Products'),
+        title: const Text('Wish List'),
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         elevation: 0,
@@ -91,26 +88,29 @@ class _SeeAllProductsState extends State<SeeAllProducts> {
                               const Text(
                                 '\$100',
                                 style: TextStyle(
-                                  fontSize: 9,
+                                  fontSize: 10,
                                   fontWeight: FontWeight.bold,
                                   color: Color(0xFF00A9B7),
                                 ),
                               ),
-                              const SizedBox(width: 2),
+
                               const Icon(
                                 Icons.star,
                                 color: Color(0xFFFFD700),
-                                size: 9,
+                                size: 11,
                               ),
+
+
 
                               const Text(
                                 '4.8',
                                 style: TextStyle(
-                                  fontSize: 9,
+                                  fontSize: 10,
                                   color: Colors.grey,
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
+
 
                               Container(
                                 padding: const EdgeInsets.all(3),
@@ -118,11 +118,7 @@ class _SeeAllProductsState extends State<SeeAllProducts> {
                                   color: const Color(0xFF00A9B7),
                                   borderRadius: BorderRadius.circular(4),
                                 ),
-                                child: const Icon(
-                                  Icons.favorite_border,
-                                  color: Colors.white,
-                                  size: 9,
-                                ),
+                                child: Image.asset('assets/icons/delete.png',scale: 8,color: Colors.white,)
                               ),
                             ],
                           )
