@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:e_commerce_app/features/auth/presentation/view/login_screen.dart';
 import 'package:flutter/material.dart';
 import '../home/view/home_screen.dart';
 import '../parent/view/parent_screen.dart';
@@ -18,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(const Duration(seconds: 3), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const ParentScreen()),
+        MaterialPageRoute(builder: (context) => const LoginScreen()),
       );
     });
   }
